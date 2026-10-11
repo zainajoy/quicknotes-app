@@ -1,0 +1,210 @@
+```css
+/* 1. Reset default browser spacing */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. General page styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f5f9;
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+/* 3. Header */
+header {
+    background-color: #0f766e;
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+}
+
+header p {
+    font-size: 1rem;
+}
+
+/* 4. Main content area */
+main {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* 5. Section cards */
+section {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+h2 {
+    margin-bottom: 18px;
+    color: #0f766e;
+}
+
+/* 6. Form layout using Flexbox */
+#note-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: white;
+}
+
+/* 7. Buttons */
+button {
+    background-color: #0f766e;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+#note-form button {
+    margin-top: 10px;
+}
+
+/* Required hover effect */
+button:hover {
+    background-color: #115e59;
+}
+
+/* 8. Search and note count */
+#search-input {
+    margin-bottom: 15px;
+}
+
+#note-count {
+    margin-bottom: 15px;
+    color: #64748b;
+}
+
+/* 9. Notes list */
+#notes-list {
+    list-style: none;
+}
+
+/* Individual note cards */
+#notes-list li {
+    padding: 18px;
+    border: 1px solid #e2e8f0;
+    border-left: 5px solid #0f766e;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background-color: #ffffff;
+    overflow-wrap: anywhere;
+}
+
+/* 10. Category colours */
+.category-personal {
+    border-left-color: #0d9488 !important;
+}
+
+.category-work {
+    border-left-color: #991b1b !important;
+}
+
+.category-study {
+    border-left-color: #2563eb !important;
+}
+
+/* Category label */
+.category-label {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+/* Note text and date */
+.note-text {
+    margin-bottom: 10px;
+}
+
+.note-date {
+    display: block;
+    color: #64748b;
+    font-size: 0.8rem;
+    margin-bottom: 12px;
+}
+
+/* Delete button */
+.delete-button {
+    background-color: #dc2626;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+}
+
+.delete-button:hover {
+    background-color: #991b1b;
+}
+
+/* 11. Validation error */
+#error-message {
+    color: #dc2626;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+/* 12. Footer */
+footer {
+    text-align: center;
+    padding: 22px;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* 13. Responsive layout for small screens */
+@media (max-width: 600px) {
+    header {
+        padding: 25px 15px;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    main {
+        margin: 20px auto;
+        padding: 0 12px;
+    }
+
+    section {
+        padding: 18px;
+    }
+
+    #note-form {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+```
