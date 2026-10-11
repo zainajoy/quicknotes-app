@@ -1,4 +1,4 @@
-javascript
+
 // 1. Select the HTML elements
 const noteForm = document.querySelector("#note-form");
 const noteInput = document.querySelector("#note-input");
