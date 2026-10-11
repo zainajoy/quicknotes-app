@@ -6,11 +6,37 @@ const noteCategory = document.querySelector("#note-category");
 const notesList = document.querySelector("#notes-list");
 const noteCount = document.querySelector("#note-count");
 const errorMessage = document.querySelector("#error-message");
+const searchInput = document.querySelector("#search-input");
 
-// 2. Store notes in an array
-const notes = [];
+// 2. Load saved notes from localStorage
+let notes = [];
 
-// 3. Update the note count
+try {
+    const savedNotes = localStorage.getItem("quickNotes");
+
+    if (savedNotes !== null) {
+        const parsedNotes = JSON.parse(savedNotes);
+
+        if (Array.isArray(parsedNotes)) {
+            notes = parsedNotes;
+        }
+    }
+} catch (error) {
+    console.error("Could not load saved notes:", error);
+}
+
+// 3. Save notes to localStorage
+function saveNotes() {
+    try {
+        localStorage.setItem("quickNotes", JSON.stringify(notes));
+    } catch (error) {
+        console.error("Could not save notes:", error);
+        errorMessage.textContent =
+            "Your notes could not be saved in this browser.";
+    }
+}
+
+// 4. Update the note count
 function updateNoteCount() {
     if (notes.length === 0) {
         noteCount.textContent = "You have no notes yet.";
@@ -21,11 +47,26 @@ function updateNoteCount() {
     }
 }
 
-// 4. Display the notes
+// 5. Display notes and filter search results
 function render() {
     notesList.textContent = "";
 
-    notes.forEach(function (note) {
+    const searchWord = searchInput.value.trim().toLowerCase();
+
+    const filteredNotes = notes.filter(function (note) {
+        return note.text.toLowerCase().includes(searchWord);
+    });
+
+    // Show a message when a search has no matches
+    if (filteredNotes.length === 0 && searchWord !== "") {
+        const message = document.createElement("li");
+        message.textContent = "No notes match your search.";
+        message.classList.add("no-results");
+        notesList.appendChild(message);
+    }
+
+    // Create a card for each matching note
+    filteredNotes.forEach(function (note) {
         const noteCard = document.createElement("li");
         noteCard.classList.add("note-card");
         noteCard.classList.add("category-" + note.category);
@@ -49,14 +90,12 @@ function render() {
         deleteButton.textContent = "Delete";
 
         deleteButton.addEventListener("click", function () {
-            const noteIndex = notes.findIndex(function (item) {
-                return item.id === note.id;
+            notes = notes.filter(function (item) {
+                return item.id !== note.id;
             });
 
-            if (noteIndex !== -1) {
-                notes.splice(noteIndex, 1);
-                render();
-            }
+            saveNotes();
+            render();
         });
 
         noteCard.appendChild(categoryLabel);
@@ -70,7 +109,7 @@ function render() {
     updateNoteCount();
 }
 
-// 5. Handle form submission and validation
+// 6. Add a new note and validate the input
 noteForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -97,14 +136,20 @@ noteForm.addEventListener("submit", function (event) {
 
     notes.push(note);
 
+    saveNotes();
+
     errorMessage.textContent = "";
     noteInput.value = "";
 
     render();
 });
 
-// 6. Show the correct initial count
-render();
+// 7. Search as the user types
+searchInput.addEventListener("input", function () {
+    render();
+});
 
+// 8. Display saved notes when the page opens
+render();
 
 
